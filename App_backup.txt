@@ -1,0 +1,180 @@
+
+import "./global.css";
+
+import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
+import { BlurView } from "expo-blur";
+import { LinearGradient } from "expo-linear-gradient";
+
+export default function App() {
+  const menus = [
+    { icon: "📖", title: "Al-Quran", subtitle: "Baca ayat suci" },
+    { icon: "🤲", title: "Doa", subtitle: "Kumpulan doa" },
+    { icon: "📿", title: "Dzikir", subtitle: "Ingat Allah" },
+    { icon: "🕌", title: "Shalat", subtitle: "Jaga ibadah" },
+  ];
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+
+      <LinearGradient
+        colors={["#F8FBFF", "#EAF3FC", "#F4F8FD"]}
+        style={StyleSheet.absoluteFill}
+      />
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.brand}>JALUR LANGIT</Text>
+            <Text style={styles.brandSub}>Level Up Your Dunia, Secure Your Akhirah</Text>
+          </View>
+          <View style={styles.profile}>
+            <Text style={styles.profileText}>A</Text>
+          </View>
+        </View>
+
+        <View style={styles.greeting}>
+          <Text style={styles.eyebrow}>ASSALAMUALAIKUM 👋</Text>
+          <Text style={styles.heading}>Temukan ketenangan.</Text>
+          <Text style={styles.description}>
+            Satu langkah kecil menuju Allah setiap hari.
+          </Text>
+        </View>
+
+        <View style={styles.prayerCard}>
+          <LinearGradient
+            colors={["#347FC4", "#193B63"]}
+            style={StyleSheet.absoluteFill}
+          />
+
+          <Text style={styles.prayerLabel}>
+            WAKTU SHALAT BERIKUTNYA
+          </Text>
+          <Text style={styles.prayerName}>Subuh</Text>
+          <Text style={styles.prayerTime}>04:30 WIB</Text>
+          <View style={styles.prayerDivider} />
+          <Text style={styles.prayerNote}>
+            Awali harimu dengan mengingat Allah.
+          </Text>
+        </View>
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Ibadah harian</Text>
+          <Text style={styles.seeAll}>Lihat semua</Text>
+        </View>
+
+        <View style={styles.menuGrid}>
+          {menus.map((menu) => (
+            <View style={styles.menuCard} key={menu.title}>
+              <BlurView
+                intensity={35}
+                tint="light"
+                style={StyleSheet.absoluteFill}
+              />
+              <View style={styles.iconBox}>
+                <Text style={styles.menuIcon}>{menu.icon}</Text>
+              </View>
+              <Text style={styles.menuTitle}>{menu.title}</Text>
+              <Text style={styles.menuSubtitle}>
+                {menu.subtitle}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.quoteCard}>
+          <Text style={styles.quoteLabel}>RENUNGAN HARI INI</Text>
+          <Text style={styles.quote}>
+            "Ingatlah, hanya dengan mengingat Allah hati menjadi tenteram."
+          </Text>
+          <Text style={styles.quoteSource}>QS. Ar-Ra'd: 28</Text>
+        </View>
+      </ScrollView>
+
+      <View style={styles.bottomContainer}>
+        <BlurView intensity={75} tint="light" style={styles.bottomBar}>
+          <Text style={styles.activeTab}>⌂{"\n"}Beranda</Text>
+          <Text style={styles.tab}>▤{"\n"}Al-Quran</Text>
+          <Text style={styles.tab}>♡{"\n"}Doa</Text>
+          <Text style={styles.tab}>◉{"\n"}Profil</Text>
+        </BlurView>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#F4F8FD" },
+  content: { paddingHorizontal: 22, paddingTop: 65, paddingBottom: 130 },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  brand: { fontSize: 17, fontWeight: "800", color: "#347FC4", letterSpacing: 2 },
+  brandSub: { fontSize: 10, color: "#8192A5", marginTop: 4 },
+  profile: {
+    width: 42, height: 42, borderRadius: 21,
+    backgroundColor: "#DDEBE1", alignItems: "center", justifyContent: "center",
+  },
+  profileText: { color: "#347FC4", fontWeight: "bold", fontSize: 17 },
+  greeting: { marginTop: 38, marginBottom: 24 },
+  eyebrow: { color: "#5689BC", fontSize: 11, fontWeight: "700", letterSpacing: 1.5 },
+  heading: { fontSize: 29, fontWeight: "800", color: "#193B63", marginTop: 9 },
+  description: { color: "#8192A5", fontSize: 13, marginTop: 8 },
+  prayerCard: {
+    overflow: "hidden", borderRadius: 25, padding: 24,
+    minHeight: 205, justifyContent: "center",
+  },
+  prayerLabel: { color: "#C5E2D3", fontSize: 10, letterSpacing: 1.5, fontWeight: "700" },
+  prayerName: { color: "white", fontSize: 32, fontWeight: "800", marginTop: 15 },
+  prayerTime: { color: "white", fontSize: 23, marginTop: 2 },
+  prayerDivider: { height: 1, backgroundColor: "#FFFFFF40", marginTop: 18 },
+  prayerNote: { color: "#D8E9DF", fontSize: 11, marginTop: 13 },
+  sectionHeader: {
+    flexDirection: "row", justifyContent: "space-between",
+    alignItems: "center", marginTop: 32, marginBottom: 16,
+  },
+  sectionTitle: { fontSize: 19, fontWeight: "800", color: "#193B63" },
+  seeAll: { color: "#5689BC", fontSize: 11 },
+  menuGrid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
+  menuCard: {
+    width: "48%", minHeight: 145, overflow: "hidden",
+    borderRadius: 22, borderWidth: 1, borderColor: "#FFFFFFB8",
+    padding: 17, marginBottom: 13, backgroundColor: "#FFFFFF75",
+  },
+  iconBox: {
+    width: 43, height: 43, borderRadius: 15,
+    backgroundColor: "#E1EEFA", alignItems: "center",
+    justifyContent: "center", marginBottom: 14,
+  },
+  menuIcon: { fontSize: 21 },
+  menuTitle: { color: "#193B63", fontSize: 14, fontWeight: "800" },
+  menuSubtitle: { color: "#8A978F", fontSize: 10, marginTop: 5 },
+  quoteCard: {
+    backgroundColor: "#EAF3FC", borderRadius: 22,
+    padding: 21, marginTop: 14,
+  },
+  quoteLabel: { color: "#5689BC", fontSize: 10, fontWeight: "800", letterSpacing: 1.3 },
+  quote: { color: "#294663", fontSize: 15, lineHeight: 24, marginTop: 13, fontWeight: "600" },
+  quoteSource: { color: "#7098BE", fontSize: 11, marginTop: 12 },
+  bottomContainer: { position: "absolute", bottom: 20, left: 22, right: 22 },
+  bottomBar: {
+    height: 72, borderRadius: 25, overflow: "hidden",
+    borderWidth: 1, borderColor: "#FFFFFFB8",
+    flexDirection: "row", justifyContent: "space-around",
+    alignItems: "center", backgroundColor: "#FFFFFF55",
+  },
+  activeTab: { color: "#347FC4", fontSize: 11, fontWeight: "800", textAlign: "center", lineHeight: 19 },
+  tab: { color: "#8192A5", fontSize: 11, textAlign: "center", lineHeight: 19 },
+});
